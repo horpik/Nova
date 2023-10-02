@@ -9,14 +9,9 @@ namespace Nova.ViewModels
     {
         public ICommand NavigateSelectFilesCommand { get; }
 
-        public NavigationBarViewModel NavigationBarViewModel { get; }
-
-        public HomeViewModel(NavigationStore navigationStore, NavigationBarViewModel navigationBarViewModel)
+        public HomeViewModel(INavigationService<SelectFilesViewModel> navigationService)
         {
-            NavigationBarViewModel = navigationBarViewModel;
-            NavigateSelectFilesCommand = new NavigateCommand<SelectFilesViewModel>(
-                new NavigationService<SelectFilesViewModel>(navigationStore,
-                    () => new SelectFilesViewModel(navigationStore, navigationBarViewModel)));
+            NavigateSelectFilesCommand = new NavigateCommand<SelectFilesViewModel>(navigationService);
         }
     }
 }

@@ -13,22 +13,18 @@ namespace Nova
     public partial class App
     {
         private readonly NavigationStore _navigationStore;
-        private readonly NavigationBarViewModel _navigationBarViewModel;
+        private readonly FilesStore _filesStore;
 
         public App()
         {
+            _filesStore = new FilesStore();
             _navigationStore = new NavigationStore();
-
-            _navigationBarViewModel = new NavigationBarViewModel(
-                CreateSelectFilesNavigationService(),
-                CreateHomeNavigationService(),
-                CreateDataEntryNavigationService()
-            );
         }
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            NavigationService<HomeViewModel> homeNavigationService = CreateHomeNavigationService();
+            INavigationService<HomeViewModel> homeNavigationService = CreateHomeNavigationService();
             homeNavigationService.Navigate();
             MainWindow = new MainWindow()
             {
@@ -38,22 +34,37 @@ namespace Nova
             base.OnStartup(e);
         }
 
-        private NavigationService<HomeViewModel> CreateHomeNavigationService()
+        private INavigationService<HomeViewModel> CreateHomeNavigationService()
         {
-            return new NavigationService<HomeViewModel>(_navigationStore,
-                () => new HomeViewModel(_navigationStore, _navigationBarViewModel));
+            return new LayoutNavigationService<HomeViewModel>(
+                _navigationStore,
+                () => new HomeViewModel(CreateSelectFilesNavigationService()),
+                CreateNavigationBarViewModel);
         }
 
-        private NavigationService<SelectFilesViewModel> CreateSelectFilesNavigationService()
+        private INavigationService<SelectFilesViewModel> CreateSelectFilesNavigationService()
         {
-            return new NavigationService<SelectFilesViewModel>(_navigationStore,
-                () => new SelectFilesViewModel(_navigationStore, _navigationBarViewModel));
+            return new LayoutNavigationService<SelectFilesViewModel>(
+                _navigationStore,
+                () => new SelectFilesViewModel(_filesStore, CreateDataEntryNavigationService()),
+                CreateNavigationBarViewModel);
         }
 
-        private NavigationService<DataEntryViewModel> CreateDataEntryNavigationService()
+        private INavigationService<DataEntryViewModel> CreateDataEntryNavigationService()
         {
-            return new NavigationService<DataEntryViewModel>(_navigationStore,
-                () => new DataEntryViewModel(new List<FileItem>(), _navigationStore, _navigationBarViewModel));
+            return new LayoutNavigationService<DataEntryViewModel>(
+                _navigationStore,
+                () => new DataEntryViewModel(_filesStore, CreateHomeNavigationService()),
+                CreateNavigationBarViewModel);
+        }
+
+        private NavigationBarViewModel CreateNavigationBarViewModel()
+        {
+            return new NavigationBarViewModel(
+                CreateSelectFilesNavigationService(),
+                CreateHomeNavigationService(),
+                CreateDataEntryNavigationService()
+            );
         }
     }
 }

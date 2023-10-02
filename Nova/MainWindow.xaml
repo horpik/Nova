@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Nova"
         xmlns:views="clr-namespace:Nova.Views"
         xmlns:viewmodels="clr-namespace:Nova.ViewModels"
+        xmlns:components="clr-namespace:Nova.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <ContentControl Content="{Binding CurrentViewModel}">
@@ -18,6 +19,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomeView></views:HomeView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
+                <components:Layout></components:Layout>
             </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>

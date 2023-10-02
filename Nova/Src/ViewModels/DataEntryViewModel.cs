@@ -13,20 +13,14 @@ namespace Nova.ViewModels
 
         public ICommand NavigateSelectFilesCommand { get; }
 
-        public NavigationBarViewModel NavigationBarViewModel { get; }
-
         private readonly List<FileItem> _fileItems;
 
         public List<FileItem> FileItems => new List<FileItem>(_fileItems);
 
-        public DataEntryViewModel(List<FileItem> fileItems, NavigationStore navigationStore,
-            NavigationBarViewModel navigationBarViewModel)
+        public DataEntryViewModel(FilesStore filesStore, INavigationService<HomeViewModel> homeNavigationService)
         {
-            _fileItems = fileItems;
-            NavigationBarViewModel = navigationBarViewModel;
-            NavigateSelectFilesCommand = new NavigateCommand<HomeViewModel>(
-                new NavigationService<HomeViewModel>(navigationStore,
-                    (() => new HomeViewModel(navigationStore, NavigationBarViewModel))));
+            _fileItems = filesStore.FileItems;
+            NavigateSelectFilesCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
         }
     }
 }

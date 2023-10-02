@@ -54,15 +54,22 @@
         <Compile Include="Src\Commands\CommandBase.cs" />
         <Compile Include="Src\Commands\NavigateCommand.cs" />
         <Compile Include="Src\Commands\SelectAllFilesCommand.cs" />
+        <Compile Include="Src\Components\Layout.xaml.cs">
+          <DependentUpon>Layout.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Src\Components\NavigationBar.xaml.cs">
           <DependentUpon>NavigationBar.xaml</DependentUpon>
         </Compile>
         <Compile Include="Src\Models\FileItem.cs" />
+        <Compile Include="Src\Services\INavigationService.cs" />
+        <Compile Include="Src\Services\LayoutNavigationService.cs" />
         <Compile Include="Src\Services\NavigationService.cs" />
         <Compile Include="Src\Services\ParameterNavigationService.cs" />
+        <Compile Include="Src\Stores\FilesStore.cs" />
         <Compile Include="Src\Stores\NavigationStore.cs" />
         <Compile Include="Src\ViewModels\DataEntryViewModel.cs" />
         <Compile Include="Src\ViewModels\HomeViewModel.cs" />
+        <Compile Include="Src\ViewModels\LayoutViewModel.cs" />
         <Compile Include="Src\ViewModels\MainViewModel.cs" />
         <Compile Include="Src\ViewModels\NavigationBarViewModel.cs" />
         <Compile Include="Src\ViewModels\SelectFilesViewModel.cs" />
@@ -88,6 +95,7 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Src\Components\Layout.xaml" />
         <Page Include="Src\Components\NavigationBar.xaml" />
         <Page Include="Src\Views\DataEntryView.xaml" />
         <Page Include="Src\Views\HomeView.xaml" />

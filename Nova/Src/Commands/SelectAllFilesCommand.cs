@@ -9,16 +9,14 @@ namespace Nova.Commands
 {
     public class SelectAllFilesCommand : CommandBase
     {
-        private readonly SelectFilesViewModel _selectFilesModel;
-        private readonly ParameterNavigationService<List<FileItem>, DataEntryViewModel> _navigationService;
+        private readonly INavigationService<DataEntryViewModel> _navigationService;
         private readonly List<FileItem> _fileItems;
 
-        public SelectAllFilesCommand(SelectFilesViewModel selectFilesModel,
-            ParameterNavigationService<List<FileItem>, DataEntryViewModel> navigationService)
+        public SelectAllFilesCommand(FilesStore filesStore,
+            INavigationService<DataEntryViewModel> navigationService)
         {
-            _selectFilesModel = selectFilesModel;
             _navigationService = navigationService;
-            _fileItems = _selectFilesModel.FileItems;
+            _fileItems = filesStore.FileItems;
         }
 
 
@@ -30,7 +28,7 @@ namespace Nova.Commands
             }
 
             MessageBox.Show("Ok!");
-            _navigationService.Navigate(_fileItems);
+            _navigationService.Navigate();
         }
     }
 }
