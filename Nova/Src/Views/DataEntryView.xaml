@@ -4,13 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Nova.Views"
+             xmlns:components="clr-namespace:Nova.Components"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Other text"></TextBlock>
-            <TextBlock Text="{Binding WelcomeMessage}"></TextBlock>
-            <Button Content="Open SelectFiles" Command="{Binding NavigateSelectFilesCommand}"></Button>
-        </StackPanel>    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <components:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}" />
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Other text"></TextBlock>
+                <TextBlock Text="{Binding WelcomeMessage}"></TextBlock>
+                <Button Content="Open SelectFiles" Command="{Binding NavigateSelectFilesCommand}"></Button>
+                <ListBox x:Name="fileListBox" SelectionMode="Multiple" ItemsSource="{Binding FileItems}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

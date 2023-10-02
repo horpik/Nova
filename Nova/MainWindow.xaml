@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type viewmodels:SelectFilesViewModel}">
                 <views:SelectFilesView></views:SelectFilesView>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView></views:HomeView>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
 </Window>

@@ -15,13 +15,17 @@ namespace Nova.ViewModels
         public ICommand SelectAllFilesCommand { get; }
 
         public List<FileItem> FileItems { get; private set; }
+        public NavigationBarViewModel NavigationBarViewModel { get; }
 
-        public SelectFilesViewModel(NavigationStore navigationStore)
+        public SelectFilesViewModel(NavigationStore navigationStore, NavigationBarViewModel navigationBarViewModel)
         {
             GenerateFiles();
-            SelectAllFilesCommand = new SelectAllFilesCommand(this,
-                new NavigationService<DataEntryViewModel>(navigationStore,
-                    () => new DataEntryViewModel(navigationStore)));
+            NavigationBarViewModel = navigationBarViewModel;
+            ParameterNavigationService<List<FileItem>, DataEntryViewModel> navigationService =
+                new ParameterNavigationService<List<FileItem>, DataEntryViewModel>(
+                    navigationStore,
+                    (parameter) => new DataEntryViewModel(parameter, navigationStore, navigationBarViewModel));
+            SelectAllFilesCommand = new SelectAllFilesCommand(this, navigationService);
         }
 
         private void GenerateFiles()
