@@ -7,6 +7,19 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <StackPanel>
+            <TextBlock Text="Some text"></TextBlock>
+            <Button Content="Select all files" Command="{Binding SelectAllFilesCommand}"></Button>
+            <ListBox x:Name="fileListBox" SelectionMode="Multiple" ItemsSource="{Binding FileItems}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </UserControl>

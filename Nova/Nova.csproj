@@ -51,6 +51,12 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Src\Commands\CommandBase.cs" />
+        <Compile Include="Src\Commands\NavigateCommand.cs" />
+        <Compile Include="Src\Commands\SelectAllFilesCommand.cs" />
+        <Compile Include="Src\Models\FileItem.cs" />
+        <Compile Include="Src\Services\NavigationService.cs" />
+        <Compile Include="Src\Stores\NavigationStore.cs" />
         <Compile Include="Src\ViewModels\DataEntryViewModel.cs" />
         <Compile Include="Src\ViewModels\MainViewModel.cs" />
         <Compile Include="Src\ViewModels\SelectFilesViewModel.cs" />
@@ -92,12 +98,6 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config"/>
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Src\Commands\" />
-      <Folder Include="Src\Models\" />
-      <Folder Include="Src\Services\" />
-      <Folder Include="Src\Stores\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
