@@ -4,7 +4,7 @@ using Nova.ViewModels;
 
 namespace Nova.Services
 {
-    public class LayoutNavigationService<TViewModel> : INavigationService<TViewModel>
+    public class LayoutNavigationService<TViewModel> : INavigationService
         where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;

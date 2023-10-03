@@ -16,7 +16,7 @@ namespace Nova.ViewModels
 
         public List<FileItem> FileItems { get; }
 
-        public SelectFilesViewModel(FilesStore filesStore, INavigationService<DataEntryViewModel> navigationService)
+        public SelectFilesViewModel(FilesStore filesStore, INavigationService navigationService)
         {
             if (filesStore.FileItems == null)
             {

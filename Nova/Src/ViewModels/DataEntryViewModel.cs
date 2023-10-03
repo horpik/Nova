@@ -17,7 +17,7 @@ namespace Nova.ViewModels
 
         public List<FileItem> FileItems => new List<FileItem>(_fileItems);
 
-        public DataEntryViewModel(FilesStore filesStore, INavigationService<HomeViewModel> homeNavigationService)
+        public DataEntryViewModel(FilesStore filesStore, INavigationService homeNavigationService)
         {
             _fileItems = filesStore.FileItems;
             NavigateSelectFilesCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);

@@ -9,7 +9,7 @@ namespace Nova.ViewModels
     {
         public ICommand NavigateSelectFilesCommand { get; }
 
-        public HomeViewModel(INavigationService<SelectFilesViewModel> navigationService)
+        public HomeViewModel(INavigationService navigationService)
         {
             NavigateSelectFilesCommand = new NavigateCommand<SelectFilesViewModel>(navigationService);
         }

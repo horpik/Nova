@@ -9,11 +9,11 @@ namespace Nova.Commands
 {
     public class SelectAllFilesCommand : CommandBase
     {
-        private readonly INavigationService<DataEntryViewModel> _navigationService;
+        private readonly INavigationService _navigationService;
         private readonly List<FileItem> _fileItems;
 
         public SelectAllFilesCommand(FilesStore filesStore,
-            INavigationService<DataEntryViewModel> navigationService)
+            INavigationService navigationService)
         {
             _navigationService = navigationService;
             _fileItems = filesStore.FileItems;

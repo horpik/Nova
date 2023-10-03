@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using Nova.Models;
 using Nova.Services;
 using Nova.Stores;
@@ -12,58 +14,69 @@ namespace Nova
     /// </summary>
     public partial class App
     {
-        private readonly NavigationStore _navigationStore;
-        private readonly FilesStore _filesStore;
+        private readonly IServiceProvider _serviceProvider;
 
         public App()
         {
-            _filesStore = new FilesStore();
-            _navigationStore = new NavigationStore();
+            IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<FilesStore>();
+            services.AddSingleton<NavigationStore>();
+
+            services.AddSingleton<INavigationService>(CreateHomeNavigationService);
+
+            services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<MainWindow>(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
+
+            _serviceProvider = services.BuildServiceProvider();
         }
 
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            INavigationService<HomeViewModel> homeNavigationService = CreateHomeNavigationService();
-            homeNavigationService.Navigate();
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_navigationStore)
-            };
+            INavigationService initialNavigation = _serviceProvider.GetRequiredService<INavigationService>();
+            initialNavigation.Navigate();
+
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
             base.OnStartup(e);
         }
 
-        private INavigationService<HomeViewModel> CreateHomeNavigationService()
+        private INavigationService CreateHomeNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<HomeViewModel>(
-                _navigationStore,
-                () => new HomeViewModel(CreateSelectFilesNavigationService()),
-                CreateNavigationBarViewModel);
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => new HomeViewModel(CreateSelectFilesNavigationService(serviceProvider)),
+                () => CreateNavigationBarViewModel(serviceProvider));
         }
 
-        private INavigationService<SelectFilesViewModel> CreateSelectFilesNavigationService()
+        private INavigationService CreateSelectFilesNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<SelectFilesViewModel>(
-                _navigationStore,
-                () => new SelectFilesViewModel(_filesStore, CreateDataEntryNavigationService()),
-                CreateNavigationBarViewModel);
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => new SelectFilesViewModel(serviceProvider.GetRequiredService<FilesStore>(),
+                    CreateDataEntryNavigationService(serviceProvider)),
+                () => CreateNavigationBarViewModel(serviceProvider));
         }
 
-        private INavigationService<DataEntryViewModel> CreateDataEntryNavigationService()
+        private INavigationService CreateDataEntryNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<DataEntryViewModel>(
-                _navigationStore,
-                () => new DataEntryViewModel(_filesStore, CreateHomeNavigationService()),
-                CreateNavigationBarViewModel);
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => new DataEntryViewModel(serviceProvider.GetRequiredService<FilesStore>(),
+                    CreateHomeNavigationService(serviceProvider)),
+                () => CreateNavigationBarViewModel(serviceProvider));
         }
 
-        private NavigationBarViewModel CreateNavigationBarViewModel()
+        private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
-                CreateSelectFilesNavigationService(),
-                CreateHomeNavigationService(),
-                CreateDataEntryNavigationService()
+                CreateSelectFilesNavigationService(serviceProvider),
+                CreateHomeNavigationService(serviceProvider),
+                CreateDataEntryNavigationService(serviceProvider)
             );
         }
     }
