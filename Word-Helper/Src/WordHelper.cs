@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using MicrosoftWord = Microsoft.Office.Interop.Word;
 
-namespace WordHelper
+namespace Word
 {
     public class WordHelper
     {
@@ -38,12 +38,13 @@ namespace WordHelper
                 }
             }
 
-            foreach (var filePath in filePaths)
+            byte countCreatedDoc = 0;
+            foreach (var filePath in filePaths.Where(filePath => CreateDoc(new FileInfo(filePath), items)))
             {
-                CreateDoc(new FileInfo(filePath), items);
+                countCreatedDoc++;
             }
 
-            Console.WriteLine("Комманда закончила своё выполнение");
+            Console.WriteLine("Создание документов завершено. Документов создано: {0}", countCreatedDoc);
         }
 
         private void OpenDocument(string file)
@@ -103,11 +104,14 @@ namespace WordHelper
             }
         }
 
+        // TODO внедрить создание документа по имени продукта 
         private void SaveDoc(string directoryName, string fileName)
         {
             try
             {
-                var newFileName = Path.Combine(directoryName + "/Result", fileName);
+                var fullDirectoryName = directoryName + "\\Result";
+                Directory.CreateDirectory(fullDirectoryName);
+                var newFileName = Path.Combine(fullDirectoryName + "\\" + fileName);
                 _app.ActiveDocument.SaveAs2(newFileName);
             }
             catch (Exception e)
@@ -116,7 +120,7 @@ namespace WordHelper
             }
         }
 
-        private void CreateDoc(FileInfo fileInfo, Dictionary<string, string> items)
+        private bool CreateDoc(FileInfo fileInfo, Dictionary<string, string> items)
         {
             try
             {
@@ -134,13 +138,17 @@ namespace WordHelper
                 {
                     SaveDoc(fileInfo.DirectoryName, fileInfo.Name);
                 }
+
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Не удалось создать файл\n" + e);
+                return false;
             }
             finally
             {
+                Console.WriteLine("Документ {0} создан", fileInfo.Name);
                 CloseDocument();
             }
         }

@@ -12,8 +12,8 @@ namespace Nova.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        private const string DirectoryPath = @"D:\\Dev\\Projects\\C#\\Nova\\Nova\\Src\\ViewModels";
-        public ICommand NavigateSelectFilesCommand { get; }
+        private const string DirectoryPath = @"D:\Dev\Projects\C#\Nova\Nova\Resources\Replacement documents\";
+        public ICommand CreateFilesCommand { get; }
         private int _countSelectedFiles;
 
         public int CountSelectedFiles
@@ -27,7 +27,8 @@ namespace Nova.ViewModels
         }
 
 
-        public HomeViewModel(FilesStore filesStore, INavigationService navigationService)
+        public HomeViewModel(FilesStore filesStore, TagDataStore tagDataStore,
+            INavigationService navigationService)
         {
             List<FileItem> fileItems;
             if (filesStore.FileItems == null)
@@ -41,8 +42,14 @@ namespace Nova.ViewModels
                 fileItems = new List<FileItem>(filesStore.FileItems);
             }
 
+            if (tagDataStore.TagDataEntry == null)
+            {
+                tagDataStore.TagDataEntry = GenerateTagData();
+            }
+
+
             CountSelectedFiles = GetSelectedFilesCount(fileItems);
-            NavigateSelectFilesCommand = new NavigateCommand<SelectFilesViewModel>(navigationService);
+            CreateFilesCommand = new CreateFilesCommand(filesStore, tagDataStore);
         }
 
         private int GetSelectedFilesCount(List<FileItem> fileItems) => fileItems.Count(file => file.IsSelected);
@@ -62,6 +69,13 @@ namespace Nova.ViewModels
             }
 
             return fileItems;
+        }
+
+        private List<TagData> GenerateTagData()
+        {
+            List<TagData> tagDataList = new List<TagData>();
+            tagDataList.Add(new TagData("Тестовое поле", "Замени меня"));
+            return tagDataList;
         }
     }
 }

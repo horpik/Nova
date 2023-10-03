@@ -78,10 +78,12 @@
           <DependentUpon>NavigationBar.xaml</DependentUpon>
         </Compile>
         <Compile Include="Src\Models\FileItem.cs" />
+        <Compile Include="Src\Models\TagData.cs" />
         <Compile Include="Src\Services\INavigationService.cs" />
         <Compile Include="Src\Services\LayoutNavigationService.cs" />
         <Compile Include="Src\Services\NavigationService.cs" />
         <Compile Include="Src\Services\ParameterNavigationService.cs" />
+        <Compile Include="Src\Stores\TagDataStore.cs" />
         <Compile Include="Src\Stores\FilesStore.cs" />
         <Compile Include="Src\Stores\NavigationStore.cs" />
         <Compile Include="Src\ViewModels\DataEntryViewModel.cs" />
@@ -137,8 +139,15 @@
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Resources\Created documents\" />
-      <Folder Include="Resources\ReplacementFiles\" />
+      <ProjectReference Include="..\Word-Helper\Word-Helper.csproj">
+        <Project>{25e0de88-9425-43d1-a3da-14fd93d96221}</Project>
+        <Name>Word-Helper</Name>
+      </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Resources\Replacement documents\test.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

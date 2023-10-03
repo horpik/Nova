@@ -22,7 +22,7 @@
             <TextBlock Grid.Column="0" Text="Выбрано:"></TextBlock>
             <TextBlock Grid.Column="1" Text="{Binding CountSelectedFiles}"></TextBlock>
         </Grid>
-        
+        <Button Grid.Row="2" Content="Создать документы" Command="{Binding CreateFilesCommand}"></Button>
     </Grid>
 
 </UserControl>

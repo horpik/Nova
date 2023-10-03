@@ -8,8 +8,8 @@
         <ProjectGuid>{25E0DE88-9425-43D1-A3DA-14FD93D96221}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>WordHelper</RootNamespace>
-        <AssemblyName>WordHelper</AssemblyName>
+        <RootNamespace>Word-Helper</RootNamespace>
+        <AssemblyName>Word-Helper</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -42,7 +42,6 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Class1.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Src\WordHelper.cs" />
     </ItemGroup>

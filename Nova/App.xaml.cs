@@ -21,13 +21,15 @@ namespace Nova
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<FilesStore>();
             services.AddSingleton<NavigationStore>();
+            services.AddSingleton<TagDataStore>();
 
             services.AddSingleton<INavigationService>(CreateHomeNavigationService);
 
             services.AddSingleton<HomeViewModel>(s => new HomeViewModel(
-                s.GetRequiredService<FilesStore>(), CreateSelectFilesNavigationService(s)));
+                s.GetRequiredService<FilesStore>(), s.GetRequiredService<TagDataStore>(),
+                CreateSelectFilesNavigationService(s)));
             services.AddSingleton<DataEntryViewModel>(s => new DataEntryViewModel(
-                s.GetRequiredService<FilesStore>(), CreateHomeNavigationService(s)));
+                s.GetRequiredService<TagDataStore>(), CreateHomeNavigationService(s)));
             services.AddSingleton<SelectFilesViewModel>(s => new SelectFilesViewModel(
                 s.GetRequiredService<FilesStore>(), CreateHomeNavigationService(s)));
             services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
@@ -57,6 +59,7 @@ namespace Nova
             return new LayoutNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => new HomeViewModel(serviceProvider.GetRequiredService<FilesStore>(),
+                    serviceProvider.GetRequiredService<TagDataStore>(),
                     CreateSelectFilesNavigationService(serviceProvider)),
                 (() => CreateNavigationBarViewModel(serviceProvider)));
         }
@@ -74,7 +77,7 @@ namespace Nova
         {
             return new LayoutNavigationService<DataEntryViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => new DataEntryViewModel(serviceProvider.GetRequiredService<FilesStore>(),
+                () => new DataEntryViewModel(serviceProvider.GetRequiredService<TagDataStore>(),
                     CreateHomeNavigationService(serviceProvider)),
                 () => CreateNavigationBarViewModel(serviceProvider));
         }

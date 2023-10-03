@@ -9,19 +9,18 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Other text"></TextBlock>
-            <TextBlock Text="{Binding WelcomeMessage}"></TextBlock>
-            <Button Content="Open SelectFiles" Command="{Binding NavigateSelectFilesCommand}"></Button>
-            <ListBox SelectionMode="Multiple" ItemsSource="{Binding FileItems}">
+            <TextBlock Text="Ввод данных"></TextBlock>
+            <ListBox SelectionMode="Multiple" ItemsSource="{Binding TagDataList}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="{Binding DescriptionTag}"></TextBlock>
+                            <TextBox Text="{Binding TagValue}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Button Content="Ok" Command="{Binding NavigateHomeCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nova", "Nova.csproj", "{4DCE5825-DA4C-4E58-944E-EE144201447E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHelper", "..\WordHelper\WordHelper.csproj", "{25E0DE88-9425-43D1-A3DA-14FD93D96221}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Word-Helper", "..\Word-Helper\Word-Helper.csproj", "{25E0DE88-9425-43D1-A3DA-14FD93D96221}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

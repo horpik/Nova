@@ -11,16 +11,16 @@ namespace Nova.ViewModels
     {
         public string WelcomeMessage => "Welcome to my application.";
 
-        public ICommand NavigateSelectFilesCommand { get; }
+        public ICommand NavigateHomeCommand { get; }
 
-        private readonly List<FileItem> _fileItems;
+        private readonly List<TagData> _tagDataList;
 
-        public List<FileItem> FileItems => new List<FileItem>(_fileItems);
+        public List<TagData> TagDataList => new List<TagData>(_tagDataList);
 
-        public DataEntryViewModel(FilesStore filesStore, INavigationService homeNavigationService)
+        public DataEntryViewModel(TagDataStore dataStore, INavigationService homeNavigationService)
         {
-            _fileItems = filesStore.FileItems;
-            NavigateSelectFilesCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
+            _tagDataList = dataStore.TagDataEntry;
+            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(homeNavigationService);
         }
     }
 }
