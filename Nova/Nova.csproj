@@ -68,6 +68,7 @@
             <SubType>Designer</SubType>
         </ApplicationDefinition>
         <Compile Include="Src\Commands\CommandBase.cs" />
+        <Compile Include="Src\Commands\CreateFilesCommand.cs" />
         <Compile Include="Src\Commands\NavigateCommand.cs" />
         <Compile Include="Src\Commands\SelectAllFilesCommand.cs" />
         <Compile Include="Src\Components\Layout.xaml.cs">
@@ -134,6 +135,10 @@
     <ItemGroup>
         <None Include="App.config"/>
         <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Resources\Created documents\" />
+      <Folder Include="Resources\ReplacementFiles\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
