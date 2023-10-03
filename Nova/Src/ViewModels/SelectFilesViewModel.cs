@@ -10,38 +10,15 @@ namespace Nova.ViewModels
 {
     public class SelectFilesViewModel : ViewModelBase
     {
-        private const string DirectoryPath = @"D:\\Dev\\Projects\\C#\\Nova\\Nova\\Src\\ViewModels";
-
         public ICommand SelectAllFilesCommand { get; }
 
         public List<FileItem> FileItems { get; }
 
         public SelectFilesViewModel(FilesStore filesStore, INavigationService navigationService)
         {
-            if (filesStore.FileItems == null)
-            {
-                FileItems = new List<FileItem>();
-                GenerateFilesList();
-                filesStore.FileItems = FileItems;
-            }
-            else
-            {
-                FileItems = new List<FileItem>(filesStore.FileItems);
-            }
+            FileItems = new List<FileItem>(filesStore.FileItems);
 
             SelectAllFilesCommand = new SelectAllFilesCommand(filesStore, navigationService);
-        }
-
-        private void GenerateFilesList()
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(DirectoryPath);
-
-            FileInfo[] files = directoryInfo.GetFiles();
-
-            foreach (FileInfo file in files)
-            {
-                FileItems.Add(new FileItem(file.Name, file.DirectoryName));
-            }
         }
     }
 }

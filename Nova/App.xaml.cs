@@ -24,11 +24,12 @@ namespace Nova
 
             services.AddSingleton<INavigationService>(CreateHomeNavigationService);
 
-            services.AddSingleton<HomeViewModel>(s => new HomeViewModel(CreateSelectFilesNavigationService(s)));
+            services.AddSingleton<HomeViewModel>(s => new HomeViewModel(
+                s.GetRequiredService<FilesStore>(), CreateSelectFilesNavigationService(s)));
             services.AddSingleton<DataEntryViewModel>(s => new DataEntryViewModel(
                 s.GetRequiredService<FilesStore>(), CreateHomeNavigationService(s)));
             services.AddSingleton<SelectFilesViewModel>(s => new SelectFilesViewModel(
-                s.GetRequiredService<FilesStore>(), CreateDataEntryNavigationService(s)));
+                s.GetRequiredService<FilesStore>(), CreateHomeNavigationService(s)));
             services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddSingleton<MainViewModel>();
 
@@ -47,7 +48,7 @@ namespace Nova
             initialNavigation.Navigate();
 
             MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            MainWindow.Show();
+            MainWindow?.Show();
             base.OnStartup(e);
         }
 
@@ -55,8 +56,9 @@ namespace Nova
         {
             return new LayoutNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<HomeViewModel>(),
-                () => CreateNavigationBarViewModel(serviceProvider));
+                () => new HomeViewModel(serviceProvider.GetRequiredService<FilesStore>(),
+                    CreateSelectFilesNavigationService(serviceProvider)),
+                (() => CreateNavigationBarViewModel(serviceProvider)));
         }
 
         private INavigationService CreateSelectFilesNavigationService(IServiceProvider serviceProvider)
@@ -64,7 +66,7 @@ namespace Nova
             return new LayoutNavigationService<SelectFilesViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => new SelectFilesViewModel(serviceProvider.GetRequiredService<FilesStore>(),
-                    CreateDataEntryNavigationService(serviceProvider)),
+                    CreateHomeNavigationService(serviceProvider)),
                 () => CreateNavigationBarViewModel(serviceProvider));
         }
 

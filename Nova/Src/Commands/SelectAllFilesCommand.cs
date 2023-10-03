@@ -27,7 +27,6 @@ namespace Nova.Commands
                 fileItem.IsSelected = true;
             }
 
-            MessageBox.Show("Ok!");
             _navigationService.Navigate();
         }
     }
