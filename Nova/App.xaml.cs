@@ -24,6 +24,12 @@ namespace Nova
 
             services.AddSingleton<INavigationService>(CreateHomeNavigationService);
 
+            services.AddSingleton<HomeViewModel>(s => new HomeViewModel(CreateSelectFilesNavigationService(s)));
+            services.AddSingleton<DataEntryViewModel>(s => new DataEntryViewModel(
+                s.GetRequiredService<FilesStore>(), CreateHomeNavigationService(s)));
+            services.AddSingleton<SelectFilesViewModel>(s => new SelectFilesViewModel(
+                s.GetRequiredService<FilesStore>(), CreateDataEntryNavigationService(s)));
+            services.AddSingleton<NavigationBarViewModel>(CreateNavigationBarViewModel);
             services.AddSingleton<MainViewModel>();
 
             services.AddSingleton<MainWindow>(s => new MainWindow()
@@ -49,7 +55,7 @@ namespace Nova
         {
             return new LayoutNavigationService<HomeViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => new HomeViewModel(CreateSelectFilesNavigationService(serviceProvider)),
+                () => serviceProvider.GetRequiredService<HomeViewModel>(),
                 () => CreateNavigationBarViewModel(serviceProvider));
         }
 
