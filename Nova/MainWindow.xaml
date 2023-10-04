@@ -8,7 +8,11 @@
         xmlns:viewmodels="clr-namespace:Nova.ViewModels"
         xmlns:components="clr-namespace:Nova.Components"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" 
+        MinWidth="800"
+        MaxWidth="2400"
+        MinHeight="450"
+        MaxHeight="1350">
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type viewmodels:DataEntryViewModel}">

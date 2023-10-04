@@ -6,21 +6,61 @@
              xmlns:local="clr-namespace:Nova.Views"
              xmlns:components="clr-namespace:Nova.Components"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="0 5 0 5"></Setter>
+            <Setter Property="Background" Value="#D2EDF7"></Setter>
+            <Setter Property="MinWidth" Value="150"></Setter>
+            <Setter Property="MaxWidth" Value="400"></Setter>
+            <Setter Property="MinHeight" Value="30"></Setter>
+            <Setter Property="MaxHeight" Value="70"></Setter>
+        </Style>
+        <Style TargetType="ItemsControl">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="Margin" Value="5 5 5 5"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style TargetType="TextBox"></Style>
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <TextBlock Text="Ввод данных"></TextBlock>
-            <ListBox SelectionMode="Multiple" ItemsSource="{Binding TagDataList}">
-                <ListBox.ItemTemplate>
+            <ItemsControl ItemsSource="{Binding TagDataList}">
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding DescriptionTag}"></TextBlock>
-                            <TextBox Text="{Binding TagValue}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="10" MaxWidth="200"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="5"
+                                TextWrapping="Wrap"
+                                Text="{Binding DescriptionTag}">
+                            </TextBlock>
+                            <TextBox
+                                Grid.Column="1"
+                                MaxLength="260"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                Text="{Binding TagValue}">
+                            </TextBox>
+                        </Grid>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Button Content="Ok" Command="{Binding NavigateHomeCommand}"></Button>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Button Content="Подтвердить ввод" Command="{Binding NavigateHomeCommand}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

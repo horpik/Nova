@@ -10,7 +10,7 @@
         {
             DescriptionTag = descriptionTag;
             Tag = tag;
-            TagValue = "Значение не задано";
+            TagValue = "";
         }
     }
 }

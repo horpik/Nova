@@ -6,38 +6,57 @@
              xmlns:local="clr-namespace:Nova.Views"
              xmlns:components="clr-namespace:Nova.Components"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="0 5 0 5"></Setter>
+            <Setter Property="Background" Value="#D2EDF7"></Setter>
+            <Setter Property="MinWidth" Value="150"></Setter>
+            <Setter Property="MaxWidth" Value="400"></Setter>
+            <Setter Property="MinHeight" Value="30"></Setter>
+            <Setter Property="MaxHeight" Value="70"></Setter>
+        </Style>
+        <Style TargetType="ItemsControl">
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="Margin" Value="5 5 5 5"></Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Text="Выберите файлы, которые необходимо создать"
-            Margin="5">
+            HorizontalAlignment="Center"
+            Text="Выберите файлы, которые необходимо создать">
         </TextBlock>
-        <Button
+        <ItemsControl
             Grid.Row="1"
-            Content="Выбрать все файлы"
-            Command="{Binding SelectAllFilesCommand}"
-            Margin="0 5 0 5">
-        </Button>
-        <ListBox
-            Grid.Row="2"
-            SelectionMode="Multiple"
             ItemsSource="{Binding FileItems}"
             VirtualizingPanel.ScrollUnit="Pixel">
-            <ListBox.ItemTemplate>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}" />
+                        <CheckBox Margin="3" IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="{Binding FileName}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button
+            Grid.Row="2"
+            Content="Выбрать все файлы"
+            Command="{Binding SelectAllFilesCommand}">
+        </Button>
     </Grid>
 </UserControl>

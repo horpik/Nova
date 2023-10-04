@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Nova.Models;
 using Nova.Stores;
 using Word;
@@ -24,7 +25,8 @@ namespace Nova.Commands
             WordHelper wordHelper = new WordHelper();
             if (_fileItems != null)
             {
-                wordHelper.CreateDocs(CreatePathsFilesList(), CreateDictionaryItems());
+                var countCreatedDocs = wordHelper.CreateDocs(CreatePathsFilesList(), CreateDictionaryItems());
+                MessageBox.Show($"Создано {countCreatedDocs} документов.");
             }
         }
 
@@ -37,13 +39,7 @@ namespace Nova.Commands
 
         private Dictionary<string, string> CreateDictionaryItems()
         {
-            var dictionaryItems = new Dictionary<string, string>();
-            foreach (var tagData in _tagDataList)
-            {
-                dictionaryItems.Add(tagData.Tag, tagData.TagValue);
-            }
-
-            return dictionaryItems;
+            return _tagDataList.ToDictionary(tagData => tagData.Tag, tagData => tagData.TagValue);
         }
     }
 }

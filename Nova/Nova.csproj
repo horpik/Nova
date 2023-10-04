@@ -145,6 +145,7 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Resources\Replacement documents\adsdf.txt" />
       <Content Include="Resources\Replacement documents\test.docx">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>

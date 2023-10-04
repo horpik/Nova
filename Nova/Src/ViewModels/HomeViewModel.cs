@@ -65,7 +65,10 @@ namespace Nova.ViewModels
 
             foreach (var file in files)
             {
-                fileItems.Add(new FileItem(file.Name, file.DirectoryName));
+                if (file.Name.Split('.').Contains("docx"))
+                {
+                    fileItems.Add(new FileItem(file.Name, file.DirectoryName));
+                }
             }
 
             return fileItems;
@@ -74,7 +77,9 @@ namespace Nova.ViewModels
         private List<TagData> GenerateTagData()
         {
             List<TagData> tagDataList = new List<TagData>();
-            tagDataList.Add(new TagData("Тестовое поле", "Замени меня"));
+            tagDataList.Add(new TagData("Описание поля 1", "Поле 1"));
+            tagDataList.Add(new TagData("Описание поля 2", "Поле 2"));
+            tagDataList.Add(new TagData("Описание поля 3", "Поле 3"));
             return tagDataList;
         }
     }

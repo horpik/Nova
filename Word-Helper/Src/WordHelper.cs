@@ -10,7 +10,7 @@ namespace Word
     {
         private readonly MicrosoftWord.Application _app = new MicrosoftWord.Application();
 
-        public void CreateDocs(List<string> filePaths, Dictionary<string, string> items)
+        public int CreateDocs(List<string> filePaths, Dictionary<string, string> items)
         {
             if (filePaths == null)
             {
@@ -45,6 +45,7 @@ namespace Word
             }
 
             Console.WriteLine("Создание документов завершено. Документов создано: {0}", countCreatedDoc);
+            return countCreatedDoc;
         }
 
         private void OpenDocument(string file)
