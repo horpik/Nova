@@ -10,8 +10,8 @@
 
 ### Демонстрация файла, который подаётся на вход
 
-[!photo before](Resources/file_before.png)
+[![photo before](Resources/file_before.png)](Resources/file_before.png)
 
 ### Демонстрация файла, который будет на выходе
 
-[!photo after](Resources/file_result.png)
+[![photo after](Resources/file_result.png)](Resources/file_result.png)
