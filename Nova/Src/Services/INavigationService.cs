@@ -1,6 +1,4 @@
-﻿using Nova.ViewModels;
-
-namespace Nova.Services
+﻿namespace Nova.Services
 {
     public interface INavigationService
     {

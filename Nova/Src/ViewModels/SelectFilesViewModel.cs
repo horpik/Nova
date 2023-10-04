@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Windows.Input;
 using Nova.Commands;
 using Nova.Models;

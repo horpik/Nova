@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
-using Nova.Models;
 using Nova.Services;
 using Nova.Stores;
 using Nova.ViewModels;

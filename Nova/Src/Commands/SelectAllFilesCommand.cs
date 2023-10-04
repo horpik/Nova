@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Windows;
 using Nova.Models;
 using Nova.Services;
 using Nova.Stores;
-using Nova.ViewModels;
 
 namespace Nova.Commands
 {

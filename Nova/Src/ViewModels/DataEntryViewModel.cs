@@ -9,8 +9,6 @@ namespace Nova.ViewModels
 {
     public class DataEntryViewModel : ViewModelBase
     {
-        public string WelcomeMessage => "Welcome to my application.";
-
         public ICommand NavigateHomeCommand { get; }
 
         private readonly List<TagData> _tagDataList;

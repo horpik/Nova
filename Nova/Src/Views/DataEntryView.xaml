@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Nova.Views"
-             xmlns:components="clr-namespace:Nova.Components"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="600">
     <UserControl.Resources>
@@ -28,39 +26,36 @@
             <Setter Property="Margin" Value="5 5 5 5"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
         </Style>
-        <Style TargetType="TextBox"></Style>
     </UserControl.Resources>
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Ввод данных"></TextBlock>
-            <ItemsControl ItemsSource="{Binding TagDataList}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="10" MaxWidth="200"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" />
-                            <TextBlock
-                                Grid.Column="0"
-                                Margin="5"
-                                TextWrapping="Wrap"
-                                Text="{Binding DescriptionTag}">
-                            </TextBlock>
-                            <TextBox
-                                Grid.Column="1"
-                                MaxLength="260"
-                                VerticalAlignment="Center"
-                                TextWrapping="Wrap"
-                                Text="{Binding TagValue}">
-                            </TextBox>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+    <StackPanel>
+        <TextBlock Text="Ввод данных"></TextBlock>
+        <ItemsControl ItemsSource="{Binding TagDataList}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="10" MaxWidth="200"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="5"
+                            TextWrapping="Wrap"
+                            Text="{Binding DescriptionTag}">
+                        </TextBlock>
+                        <TextBox
+                            Grid.Column="1"
+                            MaxLength="260"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap"
+                            Text="{Binding TagValue}">
+                        </TextBox>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-            <Button Content="Подтвердить ввод" Command="{Binding NavigateHomeCommand}"></Button>
-        </StackPanel>
-    </Grid>
+        <Button Content="Подтвердить ввод" Command="{Binding NavigateHomeCommand}"></Button>
+    </StackPanel>
 </UserControl>

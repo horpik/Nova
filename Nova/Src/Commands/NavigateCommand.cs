@@ -1,6 +1,4 @@
-﻿using System;
-using Nova.Services;
-using Nova.Stores;
+﻿using Nova.Services;
 using Nova.ViewModels;
 
 namespace Nova.Commands
