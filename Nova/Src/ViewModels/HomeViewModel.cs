@@ -11,7 +11,7 @@ namespace Nova.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
-        private const string DirectoryPath = @"D:\Dev\Projects\C#\Nova\Nova\Resources\Replacement documents\";
+        private const string DirectoryPath = @"..\..\Resources\Replacement documents\";
         public ICommand CreateFilesCommand { get; }
         private int _countSelectedFiles;
 
@@ -76,7 +76,7 @@ namespace Nova.ViewModels
         private List<TagData> GenerateTagData()
         {
             List<TagData> tagDataList = new List<TagData>();
-            tagDataList.Add(new TagData("Описание поля 1", "Поле 1"));
+            tagDataList.Add(new TagData("Описание поля 1", "Замени меня"));
             tagDataList.Add(new TagData("Описание поля 2", "Поле 2"));
             tagDataList.Add(new TagData("Описание поля 3", "Поле 3"));
             return tagDataList;

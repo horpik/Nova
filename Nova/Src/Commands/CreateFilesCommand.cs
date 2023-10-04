@@ -27,6 +27,15 @@ namespace Nova.Commands
             {
                 var countCreatedDocs = wordHelper.CreateDocs(CreatePathsFilesList(), CreateDictionaryItems());
                 MessageBox.Show($"Создано {countCreatedDocs} документов.");
+                MakeAllFilesUnselected();
+            }
+        }
+
+        private void MakeAllFilesUnselected()
+        {
+            foreach (var fileItem in _fileItems)
+            {
+                fileItem.IsSelected = false;
             }
         }
 
