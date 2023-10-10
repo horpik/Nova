@@ -145,9 +145,21 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Resources\Replacement documents\test.docx">
+      <Content Include="Resources\Replacement documents\Шаблон_методика_ДА.docx">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Resources\Replacement documents\Шаблон_методика_СА.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\Replacement documents\Шаблон_методика_ФАЗ.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\Replacement documents\Шаблон_методика_ФТ.docx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Resources\Replacement documents\Result\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

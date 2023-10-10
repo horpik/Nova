@@ -27,35 +27,42 @@
             <Setter Property="FontSize" Value="14"></Setter>
         </Style>
     </UserControl.Resources>
-    <StackPanel>
-        <TextBlock Text="Ввод данных"></TextBlock>
-        <ItemsControl ItemsSource="{Binding TagDataList}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="10" MaxWidth="200"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" />
-                        <TextBlock
-                            Grid.Column="0"
-                            Margin="5"
-                            TextWrapping="Wrap"
-                            Text="{Binding DescriptionTag}">
-                        </TextBlock>
-                        <TextBox
-                            Grid.Column="1"
-                            MaxLength="260"
-                            VerticalAlignment="Center"
-                            TextWrapping="Wrap"
-                            Text="{Binding TagValue}">
-                        </TextBox>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Ввод данных"></TextBlock>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding TagDataList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="10" MaxWidth="200"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="5"
+                                TextWrapping="Wrap"
+                                Text="{Binding DescriptionTag}">
+                            </TextBlock>
+                            <TextBox
+                                Grid.Column="1"
+                                MaxLength="260"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                Text="{Binding TagValue}">
+                            </TextBox>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Grid.Row="2" Content="Подтвердить ввод" Command="{Binding NavigateHomeCommand}"></Button>
+    </Grid>
 
-        <Button Content="Подтвердить ввод" Command="{Binding NavigateHomeCommand}"></Button>
-    </StackPanel>
 </UserControl>
